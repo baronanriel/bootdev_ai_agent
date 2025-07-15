@@ -1,5 +1,11 @@
 import os
 
+def in_working_directory(working_directory, path):
+    abs_working_directory = os.path.abspath(working_directory)
+    full_path = os.path.abspath(path)
+
+    return full_path.startswith(abs_working_directory)
+
 
 def get_files_info(working_directory, directory=None):
     working_dir = os.path.abspath(working_directory)
@@ -18,7 +24,8 @@ def get_files_info(working_directory, directory=None):
     
     
     # Check if directory is in the working directory
-    if not os.path.abspath(new_dir).startswith(working_dir):
+    #if not os.path.abspath(new_dir).startswith(working_dir):
+    if not in_working_directory(working_dir, new_dir):
         content_str += f'\nError: Cannot list "{directory}" as it is outside the permitted working directory'
         return content_str
     
@@ -30,3 +37,5 @@ def get_files_info(working_directory, directory=None):
         content_isdir = str(os.path.isdir(content_path))
         content_str += f'\n{contents}: file_size={content_size} bytes, is_dir={content_isdir}'
     return content_str
+
+

@@ -1,13 +1,13 @@
 import os
 from functions.config import MAX_CHARS
-#import get_files_info
+from functions.get_files_info import get_files_info, in_working_directory
 
 def get_file_content(working_directory, file_path):
     abs_working_directory = os.path.abspath(working_directory)
     full_file_path = os.path.join(working_directory, file_path)
     
     # Ensuring the file is in our allowed working directory
-    if not os.path.abspath(full_file_path).startswith(abs_working_directory):
+    if not in_working_directory(abs_working_directory, full_file_path):
         return f'Error: Cannot read "{file_path}" as it is outside the permitted working directory'
     
     # Ensuring the file is, in fact, a file
