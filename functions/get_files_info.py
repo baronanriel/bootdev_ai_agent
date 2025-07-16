@@ -6,11 +6,15 @@ def in_working_directory(working_directory, path):
 
     return full_path.startswith(abs_working_directory)
 
-
-def get_files_info(working_directory, directory=None):
+def set_file_paths(working_directory, directory):
     working_dir = os.path.abspath(working_directory)
     new_dir = os.path.join(working_dir, directory)
 
+    return working_dir, new_dir
+
+
+def get_files_info(working_directory, directory=None):
+    working_dir, new_dir = set_file_paths(working_directory, directory)
     content_str = f"Result for '{directory}' directory: "
 
     # Validate the Inputs to ensure they are directories

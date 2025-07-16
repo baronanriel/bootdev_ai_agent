@@ -1,9 +1,8 @@
 import os
-from functions.get_files_info import get_files_info, in_working_directory
+from functions.get_files_info import get_files_info, in_working_directory, set_file_paths
 
 def write_file(working_directory, file_path, content):
-    abs_working_directory = os.path.abspath(working_directory)
-    full_file_path = os.path.join(abs_working_directory, file_path)
+    abs_working_directory, full_file_path = set_file_paths(working_directory, file_path)
 
     if not in_working_directory(abs_working_directory, full_file_path):
         return f'Error: Cannot write to "{file_path}" as it is outside the permitted working directory'

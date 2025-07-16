@@ -1,10 +1,9 @@
 import os
 from functions.config import MAX_CHARS
-from functions.get_files_info import get_files_info, in_working_directory
+from functions.get_files_info import get_files_info, in_working_directory, set_file_paths
 
 def get_file_content(working_directory, file_path):
-    abs_working_directory = os.path.abspath(working_directory)
-    full_file_path = os.path.join(working_directory, file_path)
+    abs_working_directory, full_file_path = set_file_paths(working_directory, file_path)
     
     # Ensuring the file is in our allowed working directory
     if not in_working_directory(abs_working_directory, full_file_path):
