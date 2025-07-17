@@ -1,4 +1,20 @@
 import os
+from google.genai import types
+
+schema_get_files_info = types.FunctionDeclaration(
+    name="get_files_info",
+    description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "directory": types.Schema(
+                type=types.Type.STRING,
+                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+            ),
+        },
+    ),
+)
+
 
 def in_working_directory(working_directory, path):
     abs_working_directory = os.path.abspath(working_directory)
@@ -41,5 +57,4 @@ def get_files_info(working_directory, directory=None):
         content_isdir = str(os.path.isdir(content_path))
         content_str += f'\n{contents}: file_size={content_size} bytes, is_dir={content_isdir}'
     return content_str
-
 
