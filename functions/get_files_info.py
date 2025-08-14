@@ -29,7 +29,7 @@ def set_file_paths(working_directory, directory):
     return working_dir, new_dir
 
 
-def get_files_info(working_directory, directory=None):
+def get_files_info(working_directory, directory=''):
     working_dir, new_dir = set_file_paths(working_directory, directory)
     content_str = f"Result for '{directory}' directory: "
 
